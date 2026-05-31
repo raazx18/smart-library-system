@@ -1,41 +1,15 @@
 const express = require("express");
 const router = express.Router();
 
-const {
-  borrowBook,
-  returnBook,
-  getMyBorrow,
-  getHistory,
-  getBorrowSummary,
-  validateBorrow,
-  calculateCost,
-  getActiveBorrow
-} = require("../controllers/borrowController");
-
+const borrowController = require("../controllers/borrowController");
 const auth = require("../middleware/auth");
 
-// Borrow
-router.post("/", auth, borrowBook);
+router.post("/", auth, borrowController.borrowBook);
 
-// Return
-router.post("/return", auth, returnBook);
+router.post("/return", auth, borrowController.returnBook);
 
-// Active Borrow
-router.get("/active", auth, getActiveBorrow);
+router.get("/active", auth, borrowController.getActiveBorrow);
 
-// Summary
-router.get("/:borrowId/summary", auth, getBorrowSummary);
-
-// My Borrow
-router.get("/me", auth, getMyBorrow);
-
-// History
-router.get("/history", auth, getHistory);
-
-// Validate
-router.post("/validate", auth, validateBorrow);
-
-// Calculate
-router.post("/calculate", auth, calculateCost);
+router.get("/history", auth, borrowController.getHistory);
 
 module.exports = router;

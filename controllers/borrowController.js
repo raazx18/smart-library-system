@@ -1,8 +1,7 @@
 const Borrow = require("../models/Borrow");
 const Book = require("../models/Book");
 
-
-// ✅ Borrow Book
+// Borrow Book
 exports.borrowBook = async (req, res) => {
   try {
     const { bookId, days } = req.body;
@@ -12,22 +11,26 @@ exports.borrowBook = async (req, res) => {
     }
 
     const book = await Book.findById(bookId);
+
     if (!book || !book.isAvailable) {
       return res.status(400).json({ msg: "Book not available" });
     }
 
     const active = await Borrow.findOne({
       userId: req.user.id,
-      status: "ACTIVE"
+      status: "ACTIVE",
     });
 
     if (active) {
-      return res.status(400).json({ msg: "Return previous book first" });
+      return res.status(400).json({
+        msg: "Return previous book first",
+      });
     }
 
     const borrowDate = new Date();
+
     const dueDate = new Date();
-    dueDate.setDate(dueDate.getDate() + days);
+    dueDate.setDate(dueDate.getDate() + Number(days));
 
     const totalCost = book.pricePerDay * days;
 
@@ -37,33 +40,39 @@ exports.borrowBook = async (req, res) => {
       borrowDate,
       dueDate,
       totalCost,
-      status: "ACTIVE"
+      status: "ACTIVE",
     });
 
     book.isAvailable = false;
     await book.save();
 
-    res.json(borrow);
-
+    res.json({
+      msg: "Book borrowed successfully",
+      borrow,
+    });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({
+      error: err.message,
+    });
   }
 };
 
-
-// ✅ Return Book
+// Return Book
 exports.returnBook = async (req, res) => {
   try {
     const borrow = await Borrow.findOne({
       userId: req.user.id,
-      status: "ACTIVE"
+      status: "ACTIVE",
     }).populate("bookId");
 
     if (!borrow) {
-      return res.status(400).json({ msg: "No active borrow" });
+      return res.status(400).json({
+        msg: "No active borrow",
+      });
     }
 
     const returnDate = new Date();
+
     borrow.returnDate = returnDate;
     borrow.status = "RETURNED";
 
@@ -71,34 +80,47 @@ exports.returnBook = async (req, res) => {
 
     if (returnDate > borrow.dueDate) {
       const daysLate = Math.ceil(
-        (returnDate - borrow.dueDate) / (1000 * 60 * 60 * 24)
+        (returnDate - borrow.dueDate) /
+          (1000 * 60 * 60 * 24)
       );
-      overdueCost = daysLate * borrow.bookId.duePerDay;
+
+      overdueCost =
+        daysLate * borrow.bookId.duePerDay;
     }
 
     borrow.overdueCost = overdueCost;
 
     await borrow.save();
 
-    const book = await Book.findById(borrow.bookId._id);
+    const book = await Book.findById(
+      borrow.bookId._id
+    );
+
     book.isAvailable = true;
     await book.save();
 
-    res.json(borrow);
-
+    res.json({
+      msg: "Book returned successfully",
+      borrow,
+    });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({
+      error: err.message,
+    });
   }
 };
 
-
-// ✅ Get Active Borrow
+// Get Active Borrow
 exports.getActiveBorrow = async (req, res) => {
   try {
+    console.log("User ID:", req.user.id);
+
     const borrow = await Borrow.findOne({
       userId: req.user.id,
       status: "ACTIVE"
     }).populate("bookId");
+
+    console.log("Borrow:", borrow);
 
     res.json(borrow);
 
@@ -107,97 +129,17 @@ exports.getActiveBorrow = async (req, res) => {
   }
 };
 
-
-// ✅ Get My Borrow (optional duplicate of active)
-exports.getMyBorrow = async (req, res) => {
-  try {
-    const borrow = await Borrow.findOne({
-      userId: req.user.id,
-      status: "ACTIVE"
-    }).populate("bookId");
-
-    res.json(borrow);
-
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-};
-
-
-// ✅ Get History
+// Get History
 exports.getHistory = async (req, res) => {
   try {
     const history = await Borrow.find({
-      userId: req.user.id
+      userId: req.user.id,
     }).populate("bookId");
 
     res.json(history);
-
   } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-};
-
-
-// ✅ Validate Borrow
-exports.validateBorrow = async (req, res) => {
-  try {
-    const { bookId } = req.body;
-
-    const book = await Book.findById(bookId);
-    if (!book || !book.isAvailable) {
-      return res.status(400).json({ msg: "Book not available" });
-    }
-
-    const active = await Borrow.findOne({
-      userId: req.user.id,
-      status: "ACTIVE"
+    res.status(500).json({
+      error: err.message,
     });
-
-    if (active) {
-      return res.status(400).json({ msg: "Return previous book first" });
-    }
-
-    res.json({ msg: "Valid to borrow" });
-
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-};
-
-
-// ✅ Calculate Cost
-exports.calculateCost = (req, res) => {
-  const { days, pricePerDay } = req.body;
-
-  if (!days || !pricePerDay) {
-    return res.status(400).json({ msg: "Missing fields" });
-  }
-
-  const totalCost = days * pricePerDay;
-
-  res.json({ totalCost });
-};
-
-
-// ✅ Borrow Summary
-exports.getBorrowSummary = async (req, res) => {
-  try {
-    const borrow = await Borrow.findById(req.params.borrowId).populate("bookId");
-
-    if (!borrow) {
-      return res.status(404).json({ msg: "Borrow not found" });
-    }
-
-    res.json({
-      book: borrow.bookId.title,
-      borrowDate: borrow.borrowDate,
-      dueDate: borrow.dueDate,
-      returnDate: borrow.returnDate,
-      totalAmount: borrow.totalCost + (borrow.overdueCost || 0)
-    });
-
-  } catch (err) {
-    res.status(500).json({ error: err.message });
   }
 };
