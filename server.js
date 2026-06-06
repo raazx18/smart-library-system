@@ -11,8 +11,11 @@ app.use(express.json());
 
 // ✅ MongoDB Connection
 mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log("MongoDB Connected"))
-  .catch(err => console.log(err));
+.then(() => {
+  console.log("MongoDB Atlas Connected");
+  console.log("Database:", mongoose.connection.db.databaseName);
+})
+.catch(err => console.log(err));
 
 // ✅ Routes
 app.use("/auth", require("./routes/authRoutes"));
