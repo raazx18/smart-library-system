@@ -83,6 +83,19 @@ function Login() {
           >
             Login
           </button>
+          <button
+  onClick={() => {
+    setEmail("demo@library.com");
+    setPassword("demo123");
+
+    setTimeout(() => {
+      handleLogin();
+    }, 100);
+  }}
+  className="w-full mt-3 bg-gray-700 text-white py-3 rounded-xl font-semibold"
+>
+  Continue as Guest
+</button>
         </div>
 
       </div>
