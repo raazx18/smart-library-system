@@ -6,7 +6,7 @@ function ActiveBorrow() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/borrow/active", {
+    fetch("https://smart-library-system-ob1h.onrender.com/borrow/active", {
       headers: {
         Authorization:
           "Bearer " + localStorage.getItem("token"),
@@ -19,7 +19,7 @@ function ActiveBorrow() {
 
   const handleReturn = async () => {
     const res = await fetch(
-      "http://127.0.0.1:5000/borrow/return",
+      "https://smart-library-system-ob1h.onrender.com/borrow/return",
       {
         method: "POST",
         headers: {

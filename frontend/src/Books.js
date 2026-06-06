@@ -18,7 +18,7 @@ function Books() {
   const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/books")
+    fetch("https://smart-library-system-ob1h.onrender.com/books")
       .then((res) => res.json())
       .then((data) => setBooks(data))
       .catch((err) => console.log(err));
@@ -29,7 +29,7 @@ function Books() {
       const token = localStorage.getItem("token");
 
       const res = await fetch(
-        "http://127.0.0.1:5000/borrow",
+        "https://smart-library-system-ob1h.onrender.com/borrow",
         {
           method: "POST",
           headers: {

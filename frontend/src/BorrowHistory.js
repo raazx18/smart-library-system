@@ -6,7 +6,8 @@ function BorrowHistory() {
   const [history, setHistory] = useState([]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/borrow/history", {
+    
+    fetch("https://smart-library-system-ob1h.onrender.com/borrow/history", {
       headers: {
         Authorization:
           "Bearer " + localStorage.getItem("token"),
