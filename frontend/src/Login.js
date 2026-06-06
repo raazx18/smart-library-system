@@ -84,15 +84,36 @@ function Login() {
             Login
           </button>
           <button
-  onClick={() => {
-    setEmail("demo@library.com");
-    setPassword("demo123");
+  onClick={async () => {
+    try {
+      const res = await fetch(
+        "https://smart-library-system-ob1h.onrender.com/auth/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: "demo@library.com",
+            password: "demo123",
+          }),
+        }
+      );
 
-    setTimeout(() => {
-      handleLogin();
-    }, 100);
+      const data = await res.json();
+
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+        window.location.href = "/books";
+      } else {
+        alert(data.msg || "Guest Login Failed");
+      }
+    } catch (err) {
+      console.log(err);
+      alert("Server Error");
+    }
   }}
-  className="w-full mt-3 bg-gray-700 text-white py-3 rounded-xl font-semibold"
+  className="w-full mt-3 bg-gray-700 text-white py-3 rounded-xl font-semibold text-lg hover:scale-105 transition duration-300"
 >
   Continue as Guest
 </button>
