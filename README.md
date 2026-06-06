@@ -1,70 +1,78 @@
-# Smart Library Management System
+# 📚 Smart Library Management System
 
-This is a full-stack library management system developed using React, Node.js, Express, and MongoDB.
+Smart Library Management System is a full-stack web application built to make library operations easier for students and library users. The application allows users to browse books, borrow and return books, track active borrowings, and manage their reading activity through a simple and responsive interface.
 
-The project allows users to browse books, borrow books, return books, and view their borrowing history. It also includes a cart feature and a responsive user interface built with Tailwind CSS.
+The project was developed as a practical full-stack learning project and helped me gain experience with authentication, database management, API development, and cloud deployment.
+
+## Live Demo
+
+Frontend:
+https://smart-library-system-qdfa.vercel.app/books
+
+## Tech Stack
+
+### Frontend
+- React.js
+- React Router DOM
+- Tailwind CSS
+- Context API
+
+### Backend
+- Node.js
+- Express.js
+- JWT Authentication
+- bcryptjs
+
+### Database
+- MongoDB Atlas
+- Mongoose
+
+### Deployment
+- Vercel (Frontend)
+- Render (Backend)
 
 ## Features
 
-- User login authentication
-- View available books
+- Secure user authentication using JWT
+- Browse available books
 - Search books by title or author
 - Filter books by category
-- Pagination
-- Add books to cart
-- Increase/decrease quantity in cart
-- Remove books from cart
-- Borrow books
-- Return books
-- Active borrow tracking
-- Borrow history
-- Overdue fine calculation
-- Responsive dark theme UI
+- Borrow and return books
+- Track active borrowings
+- View borrowing history
+- Cart functionality
+- Fine calculation for overdue books
+- Responsive user interface
+- MongoDB Atlas cloud database integration
 
-## Technologies Used
+## What I Learned
 
-### Frontend
+While building this project, I worked on:
 
-- React.js
-- React Router DOM
-- Context API
-- Tailwind CSS
-
-### Backend
-
-- Node.js
-- Express.js
-
-### Database
-
-- MongoDB
-- Mongoose
-
-### Authentication
-
-- JWT
+- Designing REST APIs with Express.js
+- Connecting applications to MongoDB Atlas
+- Implementing JWT-based authentication
+- Managing application state in React
+- Deploying frontend and backend separately
+- Integrating cloud-hosted services
 
 ## Project Structure
 
 ```text
 smart-library/
 │
-├── backend/
-│   ├── controllers/
-│   ├── middleware/
-│   ├── models/
-│   ├── routes/
-│   └── server.js
-│
+├── controllers/
+├── middleware/
+├── models/
+├── routes/
 ├── frontend/
-│   ├── src/
-│   ├── public/
-│   └── package.json
-│
+├── data/
+├── server.js
+├── package.json
 └── README.md
 ```
 
-## Installation
+## Getting Started
 
 Clone the repository:
 
@@ -72,15 +80,25 @@ Clone the repository:
 git clone https://github.com/raazx18/smart-library-system.git
 ```
 
-### Backend
+Move to the project folder:
 
 ```bash
-cd backend
+cd smart-library
+```
+
+Install backend dependencies:
+
+```bash
 npm install
+```
+
+Start backend server:
+
+```bash
 npm start
 ```
 
-### Frontend
+Open another terminal and run the frontend:
 
 ```bash
 cd frontend
@@ -90,34 +108,45 @@ npm start
 
 ## Environment Variables
 
-Create a `.env` file inside the backend folder.
+Create a `.env` file in the root directory:
 
 ```env
-MONGO_URI=your_mongodb_connection_string
+MONGO_URI=your_mongodb_atlas_connection_string
 JWT_SECRET=your_secret_key
 PORT=5000
 ```
 
 ## Screenshots
 
-Add screenshots of:
+### Login Page
+(Add Screenshot)
 
-- Login Page
-- Books Page
-- Cart Page
-- Active Borrow Page
-- Borrow History Page
+### Books Dashboard
+(Add Screenshot)
 
-## Future Improvements
+### Borrowed Books
+(Add Screenshot)
 
-- Admin panel
-- User registration page
+### Borrow History
+(Add Screenshot)
+
+## Future Enhancements
+
+- Admin dashboard
+- User profile management
 - Book reviews and ratings
-- Email reminders for due dates
-- Online payment integration
+- Email notifications for due dates
+- Advanced analytics and reports
 
 ## Author
 
-Raj Soni
+**Raj Soni**
 
-GitHub: https://github.com/raazx18
+GitHub:
+:contentReference[oaicite:0]{index=0}
+
+Repository:
+:contentReference[oaicite:1]{index=1}
+
+LinkedIn:
+:contentReference[oaicite:2]{index=2}
