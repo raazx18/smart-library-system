@@ -1,15 +1,14 @@
 # 📚 Smart Library Management System
 
-Smart Library Management System is a full-stack web application built to make library operations easier for students and library users. The application allows users to browse books, borrow and return books, track active borrowings, and manage their reading activity through a simple and responsive interface.
+A full-stack library management application built using React, Node.js, Express.js, and MongoDB Atlas.
 
-The project was developed as a practical full-stack learning project and helped me gain experience with authentication, database management, API development, and cloud deployment.
+The project allows users to browse books, borrow and return books, track active borrowings, and manage their library activities through a simple and responsive interface. It was built as a hands-on project to strengthen my understanding of full-stack development, authentication, database management, and cloud deployment.
 
-## Live Demo
+## 🚀 Live Demo
 
-Frontend:
 https://smart-library-system-qdfa.vercel.app/books
 
-## Tech Stack
+## 🛠 Tech Stack
 
 ### Frontend
 - React.js
@@ -31,32 +30,32 @@ https://smart-library-system-qdfa.vercel.app/books
 - Vercel (Frontend)
 - Render (Backend)
 
-## Features
+## ✨ Features
 
-- Secure user authentication using JWT
-- Browse available books
-- Search books by title or author
-- Filter books by category
-- Borrow and return books
-- Track active borrowings
-- View borrowing history
-- Cart functionality
-- Fine calculation for overdue books
-- Responsive user interface
-- MongoDB Atlas cloud database integration
+- User Authentication (JWT)
+- Browse Available Books
+- Search Books by Title or Author
+- Filter Books by Category
+- Borrow Books
+- Return Books
+- Active Borrow Tracking
+- Borrow History
+- Overdue Fine Calculation
+- Responsive User Interface
+- MongoDB Atlas Cloud Database
 
-## What I Learned
+## 📚 What I Learned
 
-While building this project, I worked on:
+Through this project, I gained practical experience in:
 
-- Designing REST APIs with Express.js
-- Connecting applications to MongoDB Atlas
+- Building REST APIs with Express.js
+- Working with MongoDB Atlas and Mongoose
 - Implementing JWT-based authentication
-- Managing application state in React
-- Deploying frontend and backend separately
-- Integrating cloud-hosted services
+- Connecting React frontend with Node.js backend
+- Managing application state and routing
+- Deploying full-stack applications using Vercel and Render
 
-## Project Structure
+## 📂 Project Structure
 
 ```text
 smart-library/
@@ -67,12 +66,13 @@ smart-library/
 ├── routes/
 ├── frontend/
 ├── data/
+├── screenshots/
 ├── server.js
 ├── package.json
 └── README.md
 ```
 
-## Getting Started
+## ⚙️ Installation
 
 Clone the repository:
 
@@ -80,7 +80,7 @@ Clone the repository:
 git clone https://github.com/raazx18/smart-library-system.git
 ```
 
-Move to the project folder:
+Move into the project directory:
 
 ```bash
 cd smart-library
@@ -92,13 +92,13 @@ Install backend dependencies:
 npm install
 ```
 
-Start backend server:
+Start the backend server:
 
 ```bash
 npm start
 ```
 
-Open another terminal and run the frontend:
+Start the frontend:
 
 ```bash
 cd frontend
@@ -106,7 +106,7 @@ npm install
 npm start
 ```
 
-## Environment Variables
+## 🔑 Environment Variables
 
 Create a `.env` file in the root directory:
 
@@ -116,37 +116,29 @@ JWT_SECRET=your_secret_key
 PORT=5000
 ```
 
-## Screenshots
+## 📸 Screenshots
 
-### Login Page
-(Add Screenshot)
+- Login Page
+- Books Dashboard
+- Borrowed Books
+- Borrow History
+- Cart Page
 
-### Books Dashboard
-(Add Screenshot)
+## 🔮 Future Improvements
 
-### Borrowed Books
-(Add Screenshot)
+- Admin Dashboard
+- User Registration Enhancements
+- Book Reviews and Ratings
+- Email Notifications
+- Advanced Analytics
+- Fine Payment Integration
 
-### Borrow History
-(Add Screenshot)
-
-## Future Enhancements
-
-- Admin dashboard
-- User profile management
-- Book reviews and ratings
-- Email notifications for due dates
-- Advanced analytics and reports
-
-## Author
+## 👨‍💻 Author
 
 **Raj Soni**
 
-GitHub:
-:contentReference[oaicite:0]{index=0}
+GitHub: https://github.com/raazx18
 
-Repository:
-:contentReference[oaicite:1]{index=1}
+Repository: https://github.com/raazx18/smart-library-system
 
-LinkedIn:
-:contentReference[oaicite:2]{index=2}
+LinkedIn: https://www.linkedin.com/in/raj-soni-6b77122b3
